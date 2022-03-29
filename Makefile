@@ -41,9 +41,5 @@ tcb-env-setup.sh:
 
 .PHONY: clean
 clean:
-	rm -f *.stamp; \
-	[ $(docker images ${DOCKERIMAGE} | wc -l) -gt 1 ] && docker rmi -f ${DOCKERIMAGE}
-
-.PHONY: distclean
-distclean: clean
-	rm -rf hello-react tcbuild.yaml
+	@rm -f *.stamp; \
+	@docker rmi -f ${DOCKERIMAGE} > /dev/null 2>&1 || true
