@@ -1,17 +1,12 @@
-
 input:
   easy-installer:
-    # local: torizon-core-docker-apalis-imx6-Tezi_5.2.0-devel-202104+build.11.tar
-    # remote: "https://artifacts.toradex.com/.../torizon-core-docker-apalis-imx8-Tezi_5.1.0%2Bbuild.1.tar"
-    # remote: "https://artifacts.toradex.com/.../torizon-core-docker-colibri-imx6-Tezi_5.0.0-devel-202009%2Bbuild.2.tar;filename=torizon-core-docker-colibri-imx6-Tezi_5.0.0-devel-202009+build.2.tar;sha256sum=368595fa3fb00af9604e70311de3b04df6b30b280deec2f8918c46f479026ddb"
-    # toradex-feed:
-    #   version: "5.1.0"
-    #   release: quarterly
-    #   machine: colibri-imx7-emmc
-    #   distro: torizon-upstream
-    #   variant: torizon-core-docker
-    #   build-number: "1"
-    #   # build-date: "20210408"
+    toradex-feed:
+      version: "5.5.0"
+      release: quarterly
+      machine: apalis-imx8
+      distro: torizon
+      variant: torizon-core-docker
+      build-number: 11
 
 # customization:
   # splash-screen: custom-splash-screen.png
@@ -41,11 +36,11 @@ output:
     # commit-subject: "OSTree commit subject"
     # commit-body: "OSTree commit body"
   easy-installer:
-    local: output_directory
-    # name: "My customized image"
-    # description: "My customized image (description)"
-    # licence: files/custom-licence.html
-    # release-notes: files/custom-release-notes.html
+    local: tezi_output
+    name: "My customized image"
+    description: "My customized image (description)"
+    licence: files/MIT
+    release-notes: files/release-notes.html
     # bundle:
       # compose-file: files/docker-compose.yml
       # platform: linux/arm/v7

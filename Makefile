@@ -6,7 +6,15 @@ TORIZON_PASSWORD := mysecretpassword
 TORIZON_USERNAME := torizon
 TORIZON_FQDN := apalis-imx8.lab.moseleynet.net
 
-all: hello-react/build/index.html tcb-env-setup.sh tcbuild.yaml docker-image changes
+.PHONY: subdirs hello-react changes tezi_output
+
+all: tezi_output
+
+tezi_output: hello-react/build/index.html tcb-env-setup.sh tcbuild.yaml docker-image changes .tezi_output.stamp
+
+.tezi_output.stamp:
+	@${TCB} build; \
+	touch .tezi_output.stamp
 
 .PHONY: docker-image
 docker-image: .docker-image.stamp
@@ -23,7 +31,6 @@ tcbuild.yaml: tcb-env-setup.sh
 hello-react/build/index.html: hello-react
 	@[ -e hello-react/build/index.html ] || (cd hello-react && npm run build)
 
-.PHONY: subdirs hello-react changes
 hello-react:
 	@[ -e hello-react/package.json ] || npx create-react-app hello-react
 
