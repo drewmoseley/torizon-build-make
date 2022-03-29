@@ -20,7 +20,7 @@ stamps/docker-image: Dockerfile
 	docker build -t ${DOCKERIMAGE} .; \
 	touch $@
 
-tcbuild.yaml: tcb-env-setup.sh
+tcbuild.yaml:
 	@${TCB} build --create-template; \
 	grep -v '>>' tcbuild.yaml > tcbuild-clean.yaml; \
 	mv -f tcbuild-clean.yaml tcbuild.yaml
