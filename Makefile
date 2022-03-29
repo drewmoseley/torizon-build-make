@@ -47,4 +47,7 @@ tcb-env-setup.sh:
 
 .PHONY: clean
 clean:
-	@docker rmi -f ${DOCKERIMAGE} > /dev/null 2>&1 || true
+	test -n "$(docker image ls -q ${DOCKERIMAGE}" && docker rmi -f ${DOCKERIMAGE}; rm -f stamps/docker-image; \
+	rm -rf tezi_output; rm -f stamps/build_tezi; \
+	rm -rf hello-react/node_modules; rm -f stamps/build-hello-react; \
+	rm -f tcb-env-setup.sh
