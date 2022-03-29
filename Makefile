@@ -13,7 +13,7 @@ all: build-tezi tcb-env-setup.sh
 build-tezi: stamps/build-tezi
 
 stamps/build-tezi: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes
-	rm -rf tezi_output; ${TCB} build; \
+	rm -rf tezi-output; ${TCB} build; \
 	touch $@
 
 stamps/docker-image: Dockerfile
@@ -48,6 +48,6 @@ tcb-env-setup.sh:
 .PHONY: clean
 clean:
 	test -n "$(docker image ls -q ${DOCKERIMAGE}" && docker rmi -f ${DOCKERIMAGE}; rm -f stamps/docker-image; \
-	rm -rf tezi_output; rm -f stamps/build-tezi; \
+	rm -rf tezi-output; rm -f stamps/build-tezi; \
 	rm -rf hello-react/node_modules; rm -f stamps/build-hello-react; \
 	rm -f tcb-env-setup.sh
