@@ -39,8 +39,8 @@ output:
     local: tezi-output
     name: "My customized image"
     description: "My customized image (description)"
-    licence: files/MIT
-    release-notes: files/release-notes.html
+    licence: LICENSE
+    release-notes: release-notes.html
     # bundle:
       # compose-file: files/docker-compose.yml
       # platform: linux/arm/v7
