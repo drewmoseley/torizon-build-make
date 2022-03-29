@@ -6,13 +6,13 @@ TORIZON_PASSWORD := mysecretpassword
 TORIZON_USERNAME := torizon
 TORIZON_FQDN := apalis-imx8.lab.moseleynet.net
 
-.PHONY: build_tezi
+.PHONY: build-tezi
 
-all: build_tezi tcb-env-setup.sh
+all: build-tezi tcb-env-setup.sh
 
-build_tezi: stamps/build_tezi
+build-tezi: stamps/build-tezi
 
-stamps/build_tezi: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes
+stamps/build-tezi: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes
 	rm -rf tezi_output; ${TCB} build; \
 	touch $@
 
@@ -48,6 +48,6 @@ tcb-env-setup.sh:
 .PHONY: clean
 clean:
 	test -n "$(docker image ls -q ${DOCKERIMAGE}" && docker rmi -f ${DOCKERIMAGE}; rm -f stamps/docker-image; \
-	rm -rf tezi_output; rm -f stamps/build_tezi; \
+	rm -rf tezi_output; rm -f stamps/build-tezi; \
 	rm -rf hello-react/node_modules; rm -f stamps/build-hello-react; \
 	rm -f tcb-env-setup.sh
