@@ -8,11 +8,11 @@ TORIZON_FQDN := apalis-imx8.lab.moseleynet.net
 
 .PHONY: build_tezi
 
-all: build_tezi
+all: build_tezi tcb-env-setup.sh
 
 build_tezi: stamps/build_tezi
 
-stamps/build_tezi: stamps/build-hello-react tcb-env-setup.sh tcbuild.yaml stamps/docker-image stamps/changes
+stamps/build_tezi: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes
 	rm -rf tezi_output; ${TCB} build; \
 	touch $@
 
