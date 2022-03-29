@@ -2,8 +2,11 @@
 #
 TCB := ./tcb.sh
 DOCKERIMAGE := drewmoseley/hello-react:latest
+TORIZON_PASSWORD := mysecretpassword
+TORIZON_USERNAME := torizon
+TORIZON_FQDN := apalis-imx8.lab.moseleynet.net
 
-all: hello-react/build/index.html tcb-env-setup.sh tcbuild.yaml docker-image
+all: hello-react/build/index.html tcb-env-setup.sh tcbuild.yaml docker-image changes
 
 .PHONY: docker-image
 docker-image: docker-image.stamp
@@ -20,9 +23,18 @@ tcbuild.yaml: tcb-env-setup.sh
 hello-react/build/index.html: hello-react
 	@[ -e hello-react/build/index.html ] || (cd hello-react && npm run build)
 
-.PHONY: subdirs hello-react
+.PHONY: subdirs hello-react changes
 hello-react:
 	@[ -e hello-react/package.json ] || npx create-react-app hello-react
+
+changes: changes.stamp
+
+changes.stamp:
+	@${TCB} isolate --remote-host ${TORIZON_FQDN} \
+	                --remote-username ${TORIZON_USERNAME} \
+	                --remote-password ${TORIZON_PASSWORD} \
+	                --changes-directory=changes; \
+	touch changes.stamp
 
 tcb-env-setup.sh:
 	wget https://raw.githubusercontent.com/toradex/tcb-env-setup/master/tcb-env-setup.sh
