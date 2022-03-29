@@ -9,11 +9,11 @@ TORIZON_FQDN := apalis-imx8.lab.moseleynet.net
 all: hello-react/build/index.html tcb-env-setup.sh tcbuild.yaml docker-image changes
 
 .PHONY: docker-image
-docker-image: docker-image.stamp
+docker-image: .docker-image.stamp
 
-docker-image.stamp: Dockerfile
+.docker-image.stamp: Dockerfile
 	docker build -t ${DOCKERIMAGE} .; \
-	touch docker-image.stamp
+	touch .docker-image.stamp
 
 tcbuild.yaml: tcb-env-setup.sh
 	@${TCB} build --create-template; \
@@ -27,19 +27,18 @@ hello-react/build/index.html: hello-react
 hello-react:
 	@[ -e hello-react/package.json ] || npx create-react-app hello-react
 
-changes: changes.stamp
+changes: .changes.stamp
 
-changes.stamp:
+.changes.stamp:
 	@${TCB} isolate --remote-host ${TORIZON_FQDN} \
 	                --remote-username ${TORIZON_USERNAME} \
 	                --remote-password ${TORIZON_PASSWORD} \
 	                --changes-directory=changes; \
-	touch changes.stamp
+	touch .changes.stamp
 
 tcb-env-setup.sh:
 	wget https://raw.githubusercontent.com/toradex/tcb-env-setup/master/tcb-env-setup.sh
 
 .PHONY: clean
 clean:
-	@rm -f *.stamp; \
 	@docker rmi -f ${DOCKERIMAGE} > /dev/null 2>&1 || true
