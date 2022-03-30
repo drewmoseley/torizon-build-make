@@ -1,14 +1,17 @@
 # Makefile based demo for Torizon implementation
 #
-TCB := ./tcb.sh
-DOCKERIMAGE := drewmoseley/hello-react:latest
-TORIZON_PASSWORD := mysecretpassword
-TORIZON_USERNAME := torizon
-TORIZON_FQDN := apalis-imx8.lab.moseleynet.net
+TCB = DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" ./tcb.sh
+
+all: build-tezi tcb-env-setup.sh settings.mk
+
+settings.mk: settings.mk.in
+	cp settings.mk.in settings.mk; \
+	echo "Please edit settings.mk and rerun make"; \
+	false
+
+include settings.mk
 
 .PHONY: build-tezi
-
-all: build-tezi tcb-env-setup.sh
 
 build-tezi: stamps/build-tezi
 

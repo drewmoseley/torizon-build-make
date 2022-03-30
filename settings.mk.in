@@ -1,0 +1,7 @@
+CONTAINERNAME := hello-react
+DOCKER_HUB_USERNAME := username
+DOCKER_HUB_PASSWORD := password
+DOCKERIMAGE := ${DOCKER_HUB_USERNAME}/${CONTAINER_NAME}:latest
+TORIZON_USERNAME := torizon
+TORIZON_PASSWORD := password
+TORIZON_FQDN := board.fqdn.or.ip.address
