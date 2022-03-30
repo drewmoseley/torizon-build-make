@@ -22,8 +22,8 @@ include settings.mk
 ota-push: stamps/ota-push
 
 stamps/ota-push: stamps/build credentials.zip tcb-env-setup.sh
-	${TCB} push --credentials credentials.zip --canonicalize --package-name ${OSTREE_REF} --package-version ${OSTREE_VERSION} ${OSTREE_REF}
-	${TCB} push --credentials credentials.zip --canonicalize --package-name ${CONTAINERNAME} --package-version ${CONTAINERVERSION} docker-compose.yml
+	${TCB} push --credentials credentials.zip --package-name ${OSTREE_REF} --package-version ${OSTREE_VERSION} ${OSTREE_REF}
+	${TCB} push --credentials credentials.zip --canonicalize --force --package-name ${CONTAINERNAME} --package-version ${CONTAINERVERSION} docker-compose.yml
 
 credentials.zip:
 	@echo "Please download Torizon credentials to $(pwd)/credentials.zip."
