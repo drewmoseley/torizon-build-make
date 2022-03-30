@@ -21,6 +21,8 @@ stamps/build-tezi: stamps/build-hello-react tcbuild.yaml stamps/docker-image sta
 
 stamps/docker-image: Dockerfile
 	docker build -t ${DOCKERIMAGE} .; \
+	docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}" && \
+	docker push ${DOCKERIMAGE}
 	touch $@
 
 tcbuild.yaml:
