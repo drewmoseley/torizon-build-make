@@ -3,3 +3,4 @@ stamps/
 tezi-output/
 settings.mk
 credentials.zip
+docker-compose.lock.yml
