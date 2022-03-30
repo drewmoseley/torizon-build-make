@@ -5,9 +5,15 @@ TCB = ./tcb.sh
 all: ota-push tcb-env-setup.sh settings.mk
 
 settings.mk: settings.mk.in
-	cp settings.mk.in settings.mk; \
-	echo "Please edit settings.mk and rerun make"; \
-	false
+ifneq ("","$(wildcard settings.mk)")
+	@echo "The file settings.mk.in is newer than settings.mk."
+	@echo "Please review and edit as appropriate."
+	@echo "If no changes are needed please run 'touch settings.mk'"
+else
+	@cp settings.mk.in settings.mk;
+	@echo "Please edit settings.mk and rerun make";
+endif
+	@false
 
 include settings.mk
 
