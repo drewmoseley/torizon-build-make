@@ -2,7 +2,7 @@
 #
 TCB = DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" ./tcb.sh
 
-all: build-tezi tcb-env-setup.sh settings.mk
+all: build tcb-env-setup.sh settings.mk
 
 settings.mk: settings.mk.in
 	cp settings.mk.in settings.mk; \
@@ -11,11 +11,11 @@ settings.mk: settings.mk.in
 
 include settings.mk
 
-.PHONY: build-tezi
+.PHONY: build
 
-build-tezi: stamps/build-tezi
+build: stamps/build
 
-stamps/build-tezi: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes
+stamps/build: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes
 	rm -rf tezi-output; ${TCB} build; \
 	touch $@
 
@@ -53,6 +53,6 @@ tcb-env-setup.sh:
 .PHONY: clean
 clean:
 	test -n "$(docker image ls -q ${DOCKERIMAGE}" && docker rmi -f ${DOCKERIMAGE}; rm -f stamps/docker-image; \
-	rm -rf tezi-output; rm -f stamps/build-tezi; \
+	rm -rf tezi-output; rm -f stamps/build; \
 	rm -rf hello-react/node_modules; rm -f stamps/build-hello-react; \
 	rm -f tcb-env-setup.sh
