@@ -53,9 +53,12 @@ stamps/build-hello-react: stamps/create-hello-react
 	touch $@
 
 stamps/create-hello-react:
-	@mkdir hello-react-git && mv hello-react/.git hello-react-git && rm -rf hello-react
+	@mkdir hello-react-git
+	@mv hello-react/.git hello-react-git/ 2>/dev/null || true
+	rm -rf hello-react/
 	npx create-react-app hello-react
-	@mv hello-react-git/.git hello-react && rmdir hello-react-git
+	@mv hello-react-git/.git hello-react/ 2>/dev/null || true
+	@rmdir hello-react-git 2>/dev/null || true
 	touch $@
 
 stamps/changes:
