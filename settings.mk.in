@@ -5,3 +5,4 @@ DOCKERIMAGE := ${DOCKER_HUB_USERNAME}/${CONTAINER_NAME}:latest
 TORIZON_USERNAME := torizon
 TORIZON_PASSWORD := password
 TORIZON_FQDN := board.fqdn.or.ip.address
+OSTREE_REF := ostree-ref

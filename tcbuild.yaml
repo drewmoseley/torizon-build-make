@@ -32,7 +32,7 @@ input:
 
 output:
   ostree:
-    branch: my-customized-branch
+    branch: "${OSTREE_REF:?Please provide an ostree ref in file settings.mk}"
     commit-subject: "OSTree commit for customized image"
     commit-body: "This is my customized Torizon OSTree image"
   easy-installer:

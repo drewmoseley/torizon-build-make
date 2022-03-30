@@ -1,6 +1,6 @@
 # Makefile based demo for Torizon implementation
 #
-TCB = DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" ./tcb.sh
+TCB = OSTREE_REF="${OSTREE_REF}" DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" ./tcb.sh
 
 all: build tcb-env-setup.sh settings.mk
 
