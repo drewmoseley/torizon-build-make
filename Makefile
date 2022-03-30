@@ -2,7 +2,7 @@
 #
 TCB = ./tcb.sh
 
-all: ota-push tcb-env-setup.sh settings.mk
+all: ota-push settings.mk
 
 settings.mk: settings.mk.in
 ifneq ("","$(wildcard settings.mk)")
@@ -21,7 +21,7 @@ include settings.mk
 
 ota-push: stamps/ota-push
 
-stamps/ota-push: stamps/build credentials.zip
+stamps/ota-push: stamps/build credentials.zip tcb-env-setup.sh
 	${TCB} push --credentials credentials.zip --canonicalize --package-name ${OSTREE_REF} --package-version ${OSTREE_VERSION} ${OSTREE_REF}
 	${TCB} push --credentials credentials.zip --canonicalize --package-name ${CONTAINERNAME} --package-version ${CONTAINERVERSION} docker-compose.yml
 
@@ -32,7 +32,7 @@ credentials.zip:
 
 build: stamps/build
 
-stamps/build: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes
+stamps/build: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes tcb-env-setup.sh
 	rm -rf tezi-output
 	${TCB} build --set DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" --set DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" --set OSTREE_REF="${OSTREE_REF}"
 	@touch $@
@@ -43,7 +43,7 @@ stamps/docker-image: Dockerfile
 	docker push ${DOCKERIMAGE}
 	touch $@
 
-tcbuild.yaml:
+tcbuild.yaml: tcb-env-setup.sh
 	${TCB} build --create-template
 	@grep -v '>>' tcbuild.yaml > tcbuild-clean.yaml
 	@mv -f tcbuild-clean.yaml tcbuild.yaml
@@ -61,7 +61,7 @@ stamps/create-hello-react:
 	@rmdir hello-react-git 2>/dev/null || true
 	touch $@
 
-stamps/changes:
+stamps/changes: tcb-env-setup.sh
 	@rm -rf changes
 	${TCB} isolate --remote-host ${TORIZON_FQDN} \
 	               --remote-username ${TORIZON_USERNAME} \
