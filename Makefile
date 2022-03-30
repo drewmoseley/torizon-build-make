@@ -1,6 +1,6 @@
 # Makefile based demo for Torizon implementation
 #
-TCB = OSTREE_REF="${OSTREE_REF}" DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" ./tcb.sh
+TCB = ./tcb.sh
 
 all: ota-push tcb-env-setup.sh settings.mk
 
@@ -27,7 +27,7 @@ credentials.zip:
 build: stamps/build
 
 stamps/build: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes
-	rm -rf tezi-output; ${TCB} build; \
+	rm -rf tezi-output; ${TCB} build --set DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" --set DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" --set OSTREE_REF="${OSTREE_REF}"; \
 	touch $@
 
 stamps/docker-image: Dockerfile
