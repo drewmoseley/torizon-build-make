@@ -41,10 +41,9 @@ output:
     description: "My customized image (description)"
     licence: LICENSE
     release-notes: release-notes.html
-    # bundle:
-      # compose-file: files/docker-compose.yml
-      # platform: linux/arm/v7
-      # username: "${USERNAME}"
-      # password: "${PASSWORD}"
-      # registry: hub.docker.com
-      # dir: bundle/
+    bundle:
+      compose-file: docker-compose.yml
+      platform: linux/arm/v7
+      username: "${DOCKER_HUB_USERNAME:?Please provide a docker hub username in file settings.mk}"
+      password: "${DOCKER_HUB_PASSWORD:?Please provide a docker hub password in file settings.mk}"
+

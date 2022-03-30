@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  hello-react:
+    container_name: hello-react
+    image: drewmoseley/hello-react:latest
+    restart: unless-stopped
