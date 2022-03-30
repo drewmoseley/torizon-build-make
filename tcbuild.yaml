@@ -31,10 +31,10 @@ input:
       #   autoload: no
 
 output:
-  # ostree:
-    # branch: my-dev-branch
-    # commit-subject: "OSTree commit subject"
-    # commit-body: "OSTree commit body"
+  ostree:
+    branch: my-customized-branch
+    commit-subject: "OSTree commit for customized image"
+    commit-body: "This is my customized Torizon OSTree image"
   easy-installer:
     local: tezi-output
     name: "My customized image"
@@ -46,4 +46,3 @@ output:
       platform: linux/arm/v7
       username: "${DOCKER_HUB_USERNAME:?Please provide a docker hub username in file settings.mk}"
       password: "${DOCKER_HUB_PASSWORD:?Please provide a docker hub password in file settings.mk}"
-
