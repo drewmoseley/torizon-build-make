@@ -2,7 +2,7 @@
 #
 TCB = OSTREE_REF="${OSTREE_REF}" DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" ./tcb.sh
 
-all: build tcb-env-setup.sh settings.mk
+all: ota-push tcb-env-setup.sh settings.mk
 
 settings.mk: settings.mk.in
 	cp settings.mk.in settings.mk; \
@@ -11,7 +11,18 @@ settings.mk: settings.mk.in
 
 include settings.mk
 
-.PHONY: build
+.PHONY: build ota-push
+
+ota-push: stamps/ota-push
+
+stamps/ota-push: stamps/build credentials.zip
+	${TCB} push --credentials credentials.zip --canonicalize --package-name ${OSTREE_REF} --package-version ${OSTREE_VERSION} ${OSTREE_REF}; \
+	${TCB} push --credentials credentials.zip --canonicalize --package-name ${CONTAINERNAME} --package-version ${CONTAINERVERSION} docker-compose.yml
+
+credentials.zip:
+	@echo "Please download Torizon credentials to $(pwd)/credentials.zip."; \
+	echo "https://app.torizon.io/#/account"; \
+	false
 
 build: stamps/build
 

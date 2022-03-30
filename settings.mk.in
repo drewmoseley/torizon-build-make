@@ -1,4 +1,5 @@
 CONTAINERNAME := hello-react
+CONTAINERVERSION := 1.0
 DOCKER_HUB_USERNAME := username
 DOCKER_HUB_PASSWORD := password
 DOCKERIMAGE := ${DOCKER_HUB_USERNAME}/${CONTAINER_NAME}:latest
@@ -6,3 +7,4 @@ TORIZON_USERNAME := torizon
 TORIZON_PASSWORD := password
 TORIZON_FQDN := board.fqdn.or.ip.address
 OSTREE_REF := ostree-ref
+OSTREE_VERSION := 1.0
