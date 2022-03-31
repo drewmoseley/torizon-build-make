@@ -23,10 +23,9 @@ customization:
         # - apalis-imx8_hdmi_overlay.dtbo
       # add:
         # - device-trees/overlays/display-edt7_overlay.dts
-  # kernel:
-    # arguments:
-      # - key1=val1
-      # - key2=val2
+  kernel:
+    arguments:
+      - custom-arg=custom-value
     # modules:
       # - source-dir: virtual_touchscreen/
       #   autoload: no
