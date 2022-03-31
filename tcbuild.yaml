@@ -9,7 +9,7 @@ input:
       build-number: 11
 
 customization:
-  # splash-screen: custom-splash-screen.png
+  splash-screen: Max.png
   filesystem:
      - changes/
      - changes-manual/
