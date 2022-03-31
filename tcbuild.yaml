@@ -8,10 +8,10 @@ input:
       variant: torizon-core-docker
       build-number: 11
 
-# customization:
+customization:
   # splash-screen: custom-splash-screen.png
-  # filesystem:
-     # - changes/
+  filesystem:
+     - changes/
   # device-tree:
     # include-dirs:
       # - device-trees/include/
