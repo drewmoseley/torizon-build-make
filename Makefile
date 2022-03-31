@@ -80,3 +80,4 @@ clean:
 	rm -rf tezi-output; rm -f stamps/build
 	rm -rf hello-react/node_modules; rm -f stamps/build-hello-react
 	rm -f tcb-env-setup.sh
+	rm -f stamps/ota-push
