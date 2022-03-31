@@ -12,6 +12,7 @@ customization:
   # splash-screen: custom-splash-screen.png
   filesystem:
      - changes/
+     - changes-manual/
   # device-tree:
     # include-dirs:
       # - device-trees/include/
