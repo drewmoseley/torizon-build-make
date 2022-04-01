@@ -17,7 +17,7 @@ endif
 
 include settings.mk
 
-.PHONY: build ota-push local-deploy
+.PHONY: build ota-push local-deploy docker-image
 
 local-deploy:
 	${TCB} deploy --remote-host ${TORIZON_FQDN} --remote-password ${TORIZON_PASSWORD} ${OSTREE_REF}
@@ -40,6 +40,8 @@ stamps/build: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/c
 	rm -rf tezi-output
 	${TCB} build --set DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" --set DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" --set OSTREE_REF="${OSTREE_REF}"
 	@touch $@
+
+docker-image: stamps/docker-image
 
 stamps/docker-image: Dockerfile
 	docker build -t ${DOCKERIMAGE} .
