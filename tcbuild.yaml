@@ -8,9 +8,9 @@ input:
       #release: "${TORIZON_RELEASE:?Please provide a value for TORIZON_RELEASE in settings.mk}"
       release: quarterly
       #machine: "${TORIZON_MACHINE:?Please provide a value for TORIZON_MACHINE in settings.mk}"
-      machine: apalis-imx6
+      machine: apalis-imx8
       #distro: "${TORIZON_DISTRO:?Please provide a value for TORIZON_DISTRO in settings.mk}"
-      distro: torizon-upstream
+      distro: torizon
       #variant: "${TORIZON_VARIANT:?Please provide a value for TORIZON_VARIANT in settings.mk}"
       variant: torizon-core-docker
       #build-number: "${TORIZON_BUILD_NUMBER:?Please provide a value for TORIZON_BUILD_NUMBER in settings.mk}"
