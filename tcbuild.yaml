@@ -16,7 +16,7 @@ input:
       #build-number: "${TORIZON_BUILD_NUMBER:?Please provide a value for TORIZON_BUILD_NUMBER in settings.mk}"
       build-number: 11
       #build-date: "${TORIZON_BUILD_DATE:?Please provide a value for TORIZON_BUILD_DATE in settings.mk}"
-      build-date: 2022-01-07
+      #build-date: 2022-01-07
 
 customization:
   splash-screen: Max.png
