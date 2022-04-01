@@ -17,7 +17,10 @@ endif
 
 include settings.mk
 
-.PHONY: build ota-push
+.PHONY: build ota-push local-deploy
+
+local-deploy:
+	${TCB} deploy --remote-host ${TORIZON_FQDN} --remote-password ${TORIZON_PASSWORD} ${OSTREE_REF}
 
 ota-push: stamps/ota-push
 
