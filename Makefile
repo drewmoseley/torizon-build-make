@@ -24,7 +24,7 @@ local-deploy:
 
 ota-push: stamps/ota-push
 
-stamps/ota-push: stamps/build credentials.zip tcb-env-setup.sh
+stamps/ota-push: stamps/build credentials.zip tcb-env-setup.sh settings.mk
 	${TCB} push --credentials credentials.zip --package-name ${OSTREE_REF} --package-version ${OSTREE_VERSION} --hardwareid ${TORIZON_MACHINE} ${OSTREE_REF}
 	${TCB} push --credentials credentials.zip --canonicalize --force --package-name ${CONTAINERNAME} --package-version ${CONTAINERVERSION} docker-compose.yml
 	touch $@
@@ -36,14 +36,14 @@ credentials.zip:
 
 build: stamps/build
 
-stamps/build: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes tcb-env-setup.sh
+stamps/build: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/changes tcb-env-setup.sh settings.mk
 	rm -rf tezi-output
 	${TCB} build --set DOCKER_HUB_USERNAME="${DOCKER_HUB_USERNAME}" --set DOCKER_HUB_PASSWORD="${DOCKER_HUB_PASSWORD}" --set OSTREE_REF="${OSTREE_REF}"
 	@touch $@
 
 docker-image: stamps/docker-image
 
-stamps/docker-image: Dockerfile
+stamps/docker-image: Dockerfile settings.mk
 	docker build -t ${DOCKERIMAGE} .
 	docker login --username "${DOCKER_HUB_USERNAME}" --password "${DOCKER_HUB_PASSWORD}"
 	docker push ${DOCKERIMAGE}
@@ -67,7 +67,7 @@ stamps/create-hello-react:
 	@rmdir hello-react-git 2>/dev/null || true
 	touch $@
 
-stamps/changes: tcb-env-setup.sh
+stamps/changes: tcb-env-setup.sh settings.mk
 	@rm -rf changes
 	${TCB} isolate --remote-host ${TORIZON_FQDN} \
 	               --remote-username ${TORIZON_USERNAME} \
