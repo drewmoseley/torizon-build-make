@@ -40,7 +40,7 @@ stamps/build: stamps/build-hello-react tcbuild.yaml stamps/docker-image stamps/c
 
 stamps/docker-image: Dockerfile
 	docker build -t ${DOCKERIMAGE} .
-	docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}"
+	docker login --username "${DOCKER_HUB_USERNAME}" --password "${DOCKER_HUB_PASSWORD}"
 	docker push ${DOCKERIMAGE}
 	touch $@
 
