@@ -1,6 +1,7 @@
 # Makefile based demo for Torizon implementation
 #
 TCB = ./tcb.sh
+TIMESTAMP := $(shell date --iso-8601=seconds)
 
 all: ota-push settings.mk
 
@@ -25,8 +26,8 @@ local-deploy:
 ota-push: stamps/ota-push
 
 stamps/ota-push: stamps/build credentials.zip tcb-env-setup.sh settings.mk
-	${TCB} push --credentials credentials.zip --package-name ${OSTREE_REF} --package-version ${OSTREE_VERSION} --hardwareid ${TORIZON_MACHINE} ${OSTREE_REF}
-	${TCB} push --credentials credentials.zip --canonicalize --force --package-name ${CONTAINERNAME} --package-version ${CONTAINERVERSION} docker-compose.yml
+	${TCB} push --credentials credentials.zip --package-name ${OSTREE_REF} --package-version ${OSTREE_VERSION}-${TIMESTAMP} --hardwareid ${TORIZON_MACHINE} ${OSTREE_REF}
+	${TCB} push --credentials credentials.zip --canonicalize --force --package-name ${CONTAINERNAME} --package-version ${CONTAINERVERSION}-${TIMESTAMP} docker-compose.yml
 	touch $@
 
 credentials.zip:
