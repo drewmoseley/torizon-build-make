@@ -5,3 +5,8 @@ services:
     container_name: hello-react
     image: drewmoseley/hello-react:latest
     restart: unless-stopped
+    
+  hello-world:
+    container_name: hello-world
+    image: hello-world:latest
+    restart_policy: none
